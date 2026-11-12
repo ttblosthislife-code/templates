@@ -20,9 +20,7 @@ struct PR {
 	int cnt() { return (a != -1) + (b != -1); }
 	int a, b;
 };
-
 struct F { P3 q; int a, b, c; };
-
 vector<F> hull3d(const vector<P3>& A) {
 	assert(sz(A) >= 4);
 	vector<vector<PR>> E(sz(A), vector<PR>(sz(A), {-1, -1}));
