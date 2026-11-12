@@ -3,7 +3,7 @@
  * Date: 2026-11-12
  * License: CC0
  * Source: kactl
- * Description: Persistent Dynamic Leftist Tree for Heap managing and merging.
+ * Description: Persistent Dynamic Leftist Tree for Min Heap managing and merging.
  * Addition and Deletion can be turned into merges.
  * Time: $O(\log N)$ for merges.
  * Status: Tested on QOJ.
