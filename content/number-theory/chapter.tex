@@ -14,6 +14,60 @@
 	\kactlimport{MillerRabin.h}
 	\kactlimport{Factor.h}
 
+	\textbf{Min\_25 Sieve.}
+	Let $f$ be multiplicative, $p_0=1$, $p_k$ the $k$-th prime,
+	and $\operatorname{lpf}(m)$ the smallest prime factor of $m$.
+
+	\textbf{Definitions.}
+	$F_k(x)=\sum_{2\le m\le x,\ \operatorname{lpf}(m)\ge p_k}f(m)$,
+	$F_{\mathrm{prime}}(x)=\sum_{p\le x,\ p\text{ prime}}f(p)$.
+
+	\textbf{Recurrence of $F_k$.}
+	\[
+	\begin{aligned}
+	F_k(x)={}&F_{\mathrm{prime}}(x)-F_{\mathrm{prime}}(p_{k-1})\\
+	&+\sum_{\substack{i\ge k\\p_i^2\le x}}
+	\sum_{\substack{c\ge1\\p_i^{c+1}\le x}}
+	\bigl(f(p_i^c)F_{i+1}(\lfloor x/p_i^c\rfloor)
+	+f(p_i^{c+1})\bigr).
+	\end{aligned}
+	\]
+	$F_k(x)=0$ if $x<p_k$.
+
+	\textbf{Prime sieve.}
+	Define $G_{d,k}(x)=\sum m^d$ over $2\le m\le x$ where
+	$m$ is prime or $\operatorname{lpf}(m)>p_k$.
+	Initially $G_{d,0}(x)=\sum_{m=2}^x m^d$.
+	\[
+	\begin{aligned}
+	G_{d,k}(x)={}&G_{d,k-1}(x)\\
+	&-[p_k^2\le x]p_k^d
+	\left(G_{d,k-1}(\lfloor x/p_k\rfloor)
+	-\sum_{i<k}p_i^d\right).
+	\end{aligned}
+	\]
+	After sieving $p\le\sqrt n$,
+	$G_d(x)=\sum_{p\le x,\ p\text{ prime}}p^d$.
+	If $f(p)=\sum_d a_dp^d$, then
+	$F_{\mathrm{prime}}(x)=\sum_d a_dG_d(x)$.
+
+	\textbf{Optional DP.}
+	Define $H_k(x)=1+F_k(x)$.
+	\[
+	H_k(x)=H_{k+1}(x)+
+	\sum_{\substack{c\ge1\\p_k^c\le x}}
+	f(p_k^c)H_{k+1}(\lfloor x/p_k^c\rfloor).
+	\]
+	Let $r=\pi(\sqrt n)$.
+	Initialize $H_{r+1}(x)=1+F_{\mathrm{prime}}(x)
+	-F_{\mathrm{prime}}(\min(x,p_r))$.
+
+	\textbf{Answer.}
+	$S(n)=\sum_{i=1}^n f(i)=1+F_1(n)=H_1(n)$.
+All divisions are integer divisions.
+
+	\kactlimport{Min25.h}
+
 \section{Divisibility}
 	\kactlimport{euclid.h}
 	\kactlimport{Euclid.java}
